@@ -23,11 +23,11 @@ WinMain	PROC
 ; for (;;) {
 RunForever:
 	; SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
-	mov	rax, ES_SYSTEM_REQUIRED OR ES_DISPLAY_REQUIRED OR ES_CONTINUOUS
+	push	ES_SYSTEM_REQUIRED OR ES_DISPLAY_REQUIRED OR ES_CONTINUOUS
 	call	SetThreadExecutionState
 
 	; Sleep(INFINITE);
-	mov	rax, INFINITE
+	push	INFINITE
 	call	Sleep
 
 	; }
