@@ -1,0 +1,9 @@
+image: Visual Studio 2019
+
+build_script:
+  - cmd: >-
+    ml64 media-player.asm /link /subsystem:windows /defaultlib:kernel32.lib /entry:WinMain
+
+artifacts:
+  - path: media-player.exe
+    name: media-player.exe
