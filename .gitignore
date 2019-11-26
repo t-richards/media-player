@@ -1,0 +1,7 @@
+# Visual Studio Junk
+.vs
+
+# Build results
+*.exe
+*.obj
+*.lnk
