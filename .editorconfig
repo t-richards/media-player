@@ -1,0 +1,12 @@
+# top-most EditorConfig file
+root = true
+
+# Windows-style newlines with a newline ending every file
+[*]
+end_of_line = erlf
+insert_final_newline = true
+
+# 8-space tabs
+[*.asm]
+indent_style = tab
+indent_size = 8
