@@ -1,0 +1,27 @@
+name: build
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup ducible
+        uses: t-richards/setup-ducible@master
+
+      - name: Build main executable
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          ml64 media-player.asm /link /subsystem:windows /defaultlib:kernel32.lib /entry:WinMain
+
+      - name: Reproducible build
+        run: ducible media-player.exe
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: media-player.exe
+          path: media-player.exe
