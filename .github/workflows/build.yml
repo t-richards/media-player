@@ -1,5 +1,7 @@
 name: build
-on: [push]
+on:
+  - push
+  - workflow_dispatch
 
 jobs:
   build:
@@ -14,7 +16,7 @@ jobs:
       - name: Build main executable
         shell: cmd
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           ml64 media-player.asm /link /subsystem:windows /defaultlib:kernel32.lib /entry:WinMain
 
       - name: Reproducible build
