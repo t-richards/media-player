@@ -5,25 +5,29 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
-      - name: Setup ducible
-        uses: t-richards/setup-ducible@master
-
-      - name: Build main executable
+      - name: Build app (x64)
         shell: cmd
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          ml64 media-player.asm /link /subsystem:windows /defaultlib:kernel32.lib /entry:WinMain
+          ml64 media-player-x64.asm /link /subsystem:windows /defaultlib:kernel32.lib /entry:WinMain
 
-      - name: Reproducible build
-        run: ducible media-player.exe
+      - name: Build app (arm64)
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
+          armasm64 media-player-arm64.asm
+          link media-player-arm64.obj /subsystem:windows /defaultlib:kernel32.lib /entry:WinMain /machine:arm64
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload binaries
+        uses: actions/upload-artifact@v7
         with:
-          name: media-player.exe
-          path: media-player.exe
+          name: media-player
+          archive: false
+          path: |
+            media-player-x64.exe
+            media-player-arm64.exe

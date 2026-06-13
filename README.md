@@ -6,6 +6,8 @@ It does not actually play any media.
 
 This is a tiny, self-contained application which requires no installation.
 
+Native builds are provided for both x64 and ARM64.
+
 ## Download
 
 Download the latest version of this application from the [releases page](https://github.com/t-richards/media-player/releases).
