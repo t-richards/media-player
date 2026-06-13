@@ -27,7 +27,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: media-player
-          archive: false
           path: |
             media-player-x64.exe
             media-player-arm64.exe
